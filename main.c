@@ -50,9 +50,9 @@ void run_test(void)
         if (!equal(tvs[i].p_dieharder_ks, p))
             printf("[%u] FAIL Dieharder, got %.8f\n", i, p);
 
-        p = dieharder_pvalue_kupier(tvs[i].v, tvs[i].n);
+        p = dieharder_pvalue_kuiper(tvs[i].v, tvs[i].n);
         if (!equal(tvs[i].p_dieharder_ks_kuiper, p))
-            printf("[%u] FAIL Dieharder Kupier, got %.8f\n", i, p);
+            printf("[%u] FAIL Dieharder Kuiper, got %.8f\n", i, p);
 
         p = nist_pvalue(tvs[i].v, tvs[i].n);
         if (!equal(tvs[i].p_nist_sts, p))
@@ -91,7 +91,7 @@ int main(int argc, char *argv[]) {
     printf("Test size %u\n", tst_num);
 
     printf("DIEHARDER         %.8f\n", dieharder_pvalue(tst, tst_num));
-    printf("DIEHARDER_KUIPER  %.8f\n", dieharder_pvalue_kupier(tst, tst_num));
+    printf("DIEHARDER_KUIPER  %.8f\n", dieharder_pvalue_kuiper(tst, tst_num));
     printf("NIST              %.8f\n", nist_pvalue(tst, tst_num));
     printf("TESTU01_ClosePair %.8f\n", testu01_pvalue_snpair_ClosePairs(tst, tst_num));
     printf("TESTU01_MaxOft    %.8f\n", testu01_pvalue_sknuth_MaxOft(tst, tst_num));

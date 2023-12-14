@@ -13,7 +13,7 @@ inline double dieharder_pvalue(const double *P, unsigned long long N)
     return kstest(CONST_CAST(double*)(P), (int)N);
 }
 
-inline double dieharder_pvalue_kupier(const double *P, unsigned long long N)
+inline double dieharder_pvalue_kuiper(const double *P, unsigned long long N)
 {
     return kstest_kuiper(CONST_CAST(double*)(P), (int)N);
 }
