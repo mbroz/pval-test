@@ -19,21 +19,37 @@ struct tv {
     double p_nist_sts;
     double p_testu01_closepairs;
     double p_testu01_maxoft;
+    double p_testu01_ksp;
+    double p_testu01_ksm;
+    double p_testu01_ks;
+    double p_testu01_ad;
+    double p_testu01_cm;
+    double p_testu01_wg;
+    double p_testu01_wu;
+
     double v[128];
 };
 
 static struct tv tvs[] = {
     { 10, 0.77470533, 0.84135195, 0.73991829, 0.46196332, 0.46196332,
+       0.20694496, 0.85347617, 0.20694496, 0.46196267, 0.39354650, 0.53705106, 0.61016066,
       { 0.024130, 0.365111, 0.377638, 0.483505, 0.506671,
         0.740374, 0.768266, 0.817382, 0.888149, 0.985609 }
     },
     { 10, 0.78126146, 0.62603398, 0.53414622, 0.49756899, 0.49756899,
+       0.68702473, 0.16442022, 0.16442022, 0.49756968, 0.45148528, 0.17456792, 0.29593230,
       { 0.074514, 0.458474, 0.152269, 0.514449, 0.285739,
         0.422312, 0.426972, 0.715464, 0.683528, 0.662753 }
     },
     { 10, 0.59929734, 0.99787263, 0.21330931, 0.40070128, 0.40070128,
+       0.97337498, 0.20674325, 0.20674325, 0.40070128, 0.39511549, 0.53673684, 0.57356159,
       { 0.01946478, 0.11948380, 0.12925806, 0.13562642, 0.23480394,
         0.51469966, 0.61449786, 0.68046770, 0.69371794, 0.92190720 }
+    },
+    { 10, 0.78126146, 0.62603398, 0.53414622, 0.49756968, 0.49756968,
+       0.68702473, 0.16442022, 0.16442022, 0.49756968, 0.45148528, 0.17456792, 0.29593230,
+      { 0.074514, 0.458474, 0.152269, 0.514449, 0.285739,
+        0.422312, 0.426972, 0.715464, 0.683528, 0.662753 }
     },
 };
 
@@ -60,11 +76,39 @@ void run_test(void)
 
         p = testu01_pvalue_snpair_ClosePairs(tvs[i].v, tvs[i].n);
         if (!equal(tvs[i].p_testu01_closepairs, p))
-            printf("[%u] FAIL ClosePairs, got %.8f\n", i, p);
+            printf("[%u] FAIL TestU01 ClosePairs, got %.8f\n", i, p);
 
         p = testu01_pvalue_sknuth_MaxOft(tvs[i].v, tvs[i].n);
         if (!equal(tvs[i].p_testu01_maxoft, p))
-            printf("[%u] FAIL MaxOft, got %.8f\n", i, p);
+            printf("[%u] FAIL TestU01 MaxOft, got %.8f\n", i, p);
+
+        p = testu01_pvalue_ksp(tvs[i].v, tvs[i].n);
+        if (!equal(tvs[i].p_testu01_ksp, p))
+            printf("[%u] FAIL TestU01 KSP, got %.8f\n", i, p);
+
+        p = testu01_pvalue_ksm(tvs[i].v, tvs[i].n);
+        if (!equal(tvs[i].p_testu01_ksm, p))
+            printf("[%u] FAIL TestU01 KSM, got %.8f\n", i, p);
+
+        p = testu01_pvalue_ks(tvs[i].v, tvs[i].n);
+        if (!equal(tvs[i].p_testu01_ks, p))
+            printf("[%u] FAIL TestU01 KS, got %.8f\n", i, p);
+
+        p = testu01_pvalue_ad(tvs[i].v, tvs[i].n);
+        if (!equal(tvs[i].p_testu01_ad, p))
+            printf("[%u] FAIL TestU01 AD, got %.8f\n", i, p);
+
+        p = testu01_pvalue_cm(tvs[i].v, tvs[i].n);
+        if (!equal(tvs[i].p_testu01_cm, p))
+            printf("[%u] FAIL TestU01 CM, got %.8f\n", i, p);
+
+        p = testu01_pvalue_wg(tvs[i].v, tvs[i].n);
+        if (!equal(tvs[i].p_testu01_wg, p))
+            printf("[%u] FAIL TestU01 WG, got %.8f\n", i, p);
+
+        p = testu01_pvalue_wu(tvs[i].v, tvs[i].n);
+        if (!equal(tvs[i].p_testu01_wu, p))
+            printf("[%u] FAIL TestU01 WU, got %.8f\n", i, p);
     }
 }
 
@@ -95,6 +139,13 @@ int main(int argc, char *argv[]) {
     printf("NIST              %.8f\n", nist_pvalue(tst, tst_num));
     printf("TESTU01_ClosePair %.8f\n", testu01_pvalue_snpair_ClosePairs(tst, tst_num));
     printf("TESTU01_MaxOft    %.8f\n", testu01_pvalue_sknuth_MaxOft(tst, tst_num));
+    printf("TESTU01_KSP       %.8f\n", testu01_pvalue_ksp(tst, tst_num));
+    printf("TESTU01_KSM       %.8f\n", testu01_pvalue_ksm(tst, tst_num));
+    printf("TESTU01_KS        %.8f\n", testu01_pvalue_ks(tst, tst_num));
+    printf("TESTU01_AD        %.8f\n", testu01_pvalue_ad(tst, tst_num));
+    printf("TESTU01_CM        %.8f\n", testu01_pvalue_cm(tst, tst_num));
+    printf("TESTU01_WG        %.8f\n", testu01_pvalue_wg(tst, tst_num));
+    printf("TESTU01_WU        %.8f\n", testu01_pvalue_wu(tst, tst_num));
 
     return 0;
 }
